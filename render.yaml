@@ -1,0 +1,23 @@
+databases:
+  - name: school-postgres
+    databaseName: school_system
+    user: school_admin
+    plan: free
+    region: singapore
+    postgresMajorVersion: 17
+    diskSizeGB: 1
+
+services:
+  - type: web
+    name: school-management-system
+    runtime: python
+    plan: free
+    region: singapore
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: school-postgres
+          property: connectionString
