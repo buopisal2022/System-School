@@ -21,3 +21,7 @@ services:
         fromDatabase:
           name: school-postgres
           property: connectionString
+      - key: ADMIN_PASSWORD
+        generateValue: true
+      - key: ADMIN_PIN
+        generateValue: true
